@@ -1,0 +1,15 @@
+{
+  "name": "bolter",
+  "version": "0.0.0",
+  "description": "Caching framework.",
+  "main": "bolter.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "1.12.0"
+  },
+  "repository": "",
+  "author": "filipovsky",
+  "license": "BSD"
+}
