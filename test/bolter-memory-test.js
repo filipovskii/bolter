@@ -72,7 +72,7 @@ describe('bolter-memory', function () {
 
     cachedF = cache.wrap(f);
 
-    cachedF.on('miss', done);
+    cachedF.cache.on('miss', done);
 
     cachedF();
   });
@@ -83,7 +83,7 @@ describe('bolter-memory', function () {
     function f(a, b) { return a + b;  }
     cachedF = cache.wrap(f);
 
-    cachedF.on('miss', function (a, b) {
+    cachedF.cache.on('miss', function (a, b) {
       assert.equal('a', a);
       assert.equal('b', b);
       done();
@@ -98,7 +98,7 @@ describe('bolter-memory', function () {
 
     cachedF = cache.wrap(f);
 
-    cachedF.on('hit', function (x) {
+    cachedF.cache.on('hit', function (x) {
       assert.equal('x', x);
       done();
     });
@@ -114,7 +114,7 @@ describe('bolter-memory', function () {
     cachedF = cache.wrap(f);
 
     cachedF(1);
-    cachedF.del(1);
+    cachedF.cache.del(1);
     cachedF(1);
 
     assert.deepEqual([ 1, 1 ], calls);
@@ -126,13 +126,13 @@ describe('bolter-memory', function () {
     function f(x) { return x; }
     cachedF = cache.wrap(f);
 
-    cachedF.on('del', function (x) {
+    cachedF.cache.on('del', function (x) {
       assert.equal(1, x);
       done();
     });
 
     cachedF(1);
-    cachedF.del(1);
+    cachedF.cache.del(1);
   });
 
 });
