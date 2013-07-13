@@ -1,6 +1,6 @@
 ## Bolter - the caching framework for node.js
 
-
+    ```javascript
     var bolter = require('bolter');
 
     cache = bolter({ storage: 'memory' });
@@ -16,4 +16,4 @@
 
     f(1); // Cache miss for x === 1
     f(1); // Cache hit for x === 1
-
+    ```
