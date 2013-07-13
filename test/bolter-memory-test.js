@@ -66,4 +66,73 @@ describe('bolter-memory', function () {
     assert.deepEqual([ 1, 2, 1, 2 ], results);
   });
 
+  it('has `miss` event', function (done) {
+    var cachedF;
+    function f() {}
+
+    cachedF = cache.wrap(f);
+
+    cachedF.on('miss', done);
+
+    cachedF();
+  });
+
+  it('passes arguments when omitting miss event', function (done) {
+    var cachedF;
+
+    function f(a, b) { return a + b;  }
+    cachedF = cache.wrap(f);
+
+    cachedF.on('miss', function (a, b) {
+      assert.equal('a', a);
+      assert.equal('b', b);
+      done();
+    });
+
+    cachedF('a', 'b');
+  });
+
+  it('has `hit` event', function (done) {
+    var cachedF;
+    function f(x) { return x; }
+
+    cachedF = cache.wrap(f);
+
+    cachedF.on('hit', function (x) {
+      assert.equal('x', x);
+      done();
+    });
+
+    cachedF('x');
+    cachedF('x'); //should emit `hit` event
+  });
+
+  it('can del key', function () {
+    var calls = [], cachedF;
+
+    function f(x) { calls.push(x); }
+    cachedF = cache.wrap(f);
+
+    cachedF(1);
+    cachedF.del(1);
+    cachedF(1);
+
+    assert.deepEqual([ 1, 1 ], calls);
+  });
+
+  it('omit del event if key was stored', function (done) {
+    var cachedF;
+
+    function f(x) { return x; }
+    cachedF = cache.wrap(f);
+
+    cachedF.on('del', function (x) {
+      assert.equal(1, x);
+      done();
+    });
+
+    cachedF(1);
+    cachedF.del(1);
+  });
+
 });
