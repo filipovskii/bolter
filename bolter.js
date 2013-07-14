@@ -16,13 +16,13 @@ function bolter(config) {
     , cacheMixin = module.mixin
     , defaults = module.defaults || function () { return {}; };
 
-  return function cacheWrapper(f) {
+  return function cacheWrapper(f, cacheConfig) {
 
     var cache, cached;
 
     cache = Object.create(_.extend(cacheMixin, EventEmitter.prototype));
     cache.name = f.name || '[Anonymous Function]';
-    cache = _.extend(cache, defaults());
+    cache = _.extend(cache, defaults(), cacheConfig);
 
     cached = function cached() {
       var args = _.toArray(arguments)

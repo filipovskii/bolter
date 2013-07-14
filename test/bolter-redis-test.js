@@ -58,6 +58,22 @@ describe('bolter-redis', function () {
 
   });
 
+  it('is configurable to use any redis cache prefix', function (done) {
+    var cached = cache(function (x) { return x; }, {
+      prefix: 'cache-prefix'
+    });
+
+    cached(1)
+      .then(function () {
+        return Q.ninvoke(client, 'exists', 'cache-prefix:1');
+      })
+      .then(function (result) {
+        assert.ok(result);
+        done();
+      })
+      .done();
+  });
+
   runCommonTestsFor(cacheFactory);
 
 });
