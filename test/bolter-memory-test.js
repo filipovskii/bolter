@@ -7,7 +7,7 @@ var bolter = require('../bolter')
 describe('bolter-memory', function () {
   var cache;
 
-  before(function () {
+  beforeEach(function () {
     cache = bolter({ storage: 'memory' });
   });
 
