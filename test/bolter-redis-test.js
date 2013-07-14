@@ -85,6 +85,26 @@ describe('bolter-redis', function () {
     });
   });
 
+  it('can expire keys', function (done) {
+
+    var calls = 0
+      , cached = cache(function (x) { calls++; }, {
+          expire: 3
+        , prefix: 'timeout-test'
+        });
+
+    cached(1)
+      .then(function () {
+        return Q.ninvoke(client, 'ttl', 'timeout-test:1');
+      })
+      .then(function (ttl) {
+        assert.ok(ttl > 0);
+        done();
+      })
+      .done();
+
+  });
+
   runCommonTestsFor(cacheFactory);
 
 });

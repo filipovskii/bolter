@@ -6,6 +6,7 @@ var Q = require('q')
 
 module.exports = exports = bolter;
 
+Q.longStackSupport = true;
 
 function bolter(config) {
 
