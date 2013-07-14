@@ -2,7 +2,7 @@
 
 
 
-### In-memory cache (backed by *{}*)
+### In-memory cache (backed by {})
 
 ```javascript
 var bolter = require('bolter');
@@ -20,9 +20,7 @@ f.cache.on('miss', function (x) {
 
 f(1); // Cache miss for x === 1
 f(1); // Cache hit for x === 1
-f(1)
-  .then(function (value) {
+f(1).then(function (value) {
     console.log('Result of f(1) is ', value);
-  })
-  .done();
+  }).done(); // Result of f(1) is 1
 ```
