@@ -5,7 +5,9 @@
 ### In-memory cache (backed by {})
 
 ```javascript
-var bolter = require('bolter');
+var bolter = require('bolter')
+  , cache
+  , f;
 
 cache = bolter({ storage: 'memory' });
 f = cache(function (x) { return x; });
@@ -29,7 +31,9 @@ f(1).then(function (value) {
 ### Redis cache
 
 ```javascript
-var bolter = require('bolter');
+var bolter = require('bolter')
+  , cache
+  , f;
 
 cache = bolter({ storage: 'redis' });
 f = cache(function (x) { return x; }, { /* options */ });
