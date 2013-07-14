@@ -74,6 +74,17 @@ describe('bolter-redis', function () {
       .done();
   });
 
+  it('is configurable to use different redis client', function (done) {
+    var cached = cache(function (x) { return x; }, {
+      client: null
+    });
+
+    // exception will be raised when trying to use null client
+    cached().then(undefined, function (error) {
+      done();
+    });
+  });
+
   runCommonTestsFor(cacheFactory);
 
 });
