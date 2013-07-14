@@ -48,13 +48,18 @@ f = cache(function (x) { return x; }, { /* options */ });
     default: name of cached function
 
         f = cache(f);
-        f(1); // will store value under f:1 key in redis
+        f(1, 2); // will store value under f:1:2 key in redis
 
         g = cache(g, { prefix: 'g-prefix' });
-        g(1); // will store value under g-prefix:1 key in redis
+        g(1, 2); // will store value under g-prefix:1:2 key in redis
 
 
   * **client** - custom redis client,
     see [redis client for node](https://github.com/mranney/node_redis)
 
     default: bolter will try to connect to standart redis port on localhost
+
+
+  * **expire** - key expiration timeout in seconds
+
+    default: none
