@@ -4,17 +4,21 @@ var assert = require('assert')
   , Q = require('q')
   , redis = require('redis')
   , client = redis.createClient()
-  , _ = require('underscore');
+  , _ = require('underscore')
+  , runCommonTestsFor = require('./bolter-common-test');
 
 
 describe('bolter-redis', function () {
-  var cache;
+  var cache, cacheFactory;
 
-  beforeEach(function (done) {
-    cache = bolter({
+  cacheFactory = function () {
+    return bolter({
       storage: 'redis'
     });
+  };
 
+  beforeEach(function (done) {
+    cache = cacheFactory();
     Q.ninvoke(client, 'flushdb').then(function () {
       done();
     });
@@ -53,5 +57,7 @@ describe('bolter-redis', function () {
       }).done();
 
   });
+
+  runCommonTestsFor(cacheFactory);
 
 });

@@ -14,7 +14,7 @@ function bolter(config) {
 
   var module = require('./lib/bolter-' + config.storage)
     , cacheMixin = module.mixin
-    , defaults = module.defaults || function () { return {} };
+    , defaults = module.defaults || function () { return {}; };
 
   return function cacheWrapper(f) {
 
