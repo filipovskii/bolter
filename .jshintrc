@@ -19,5 +19,11 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
-  "globals": { "describe": true, "before": true, "it": true }
+  "globals": {
+    "describe": true,
+    "before": true,
+    "beforeEach": true,
+    "it": true,
+    "xit": true
+  }
 }
