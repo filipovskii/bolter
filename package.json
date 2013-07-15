@@ -6,6 +6,12 @@
   "scripts": {
     "test": "mocha"
   },
+  "dependencies": {
+    "winston": "0.7.2",
+    "underscore": "1.5.1",
+    "redis": "0.8.4",
+    "q": "0.9.6"
+  },
   "devDependencies": {
     "mocha": "1.12.0"
   },
